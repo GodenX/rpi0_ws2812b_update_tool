@@ -18,13 +18,17 @@ if [ -d "/home/pi/rpi0_ws2812b/" ]; then
  cd ./rpi0_ws2812b/
  if [ -f "/home/pi/ws2812b_auto_update/rpi0_ws2812b/update" ]; then
   echo "update..."
-  rm update
+  rm -f update
   rm -rf /home/pi/rpi0_ws2812b/
   cd ..
   mv /home/pi/rpi0_ws2812b /home/pi/
  else
   echo "git pull"
   cd /home/pi/rpi0_ws2812b/
+  if [ -f "/home/pi/rpi0_ws2812b/wait_command" ]; then
+   echo "rm wait_command"
+   rm -f wait_command
+  fi
   timeout 60 git checkout -f
   timeout 60 git pull -f
   rm -rf /home/pi/ws2812b_auto_update/rpi0_ws2812b/
@@ -33,7 +37,7 @@ else
  mv /home/pi/ws2812b_auto_update/rpi0_ws2812b/ /home/pi/
  cd /home/pi/rpi0_ws2812b/
  if [ -f "/home/pi/rpi0_ws2812b/update" ]; then
-  rm update
+  rm -f update
  fi
 fi
 
