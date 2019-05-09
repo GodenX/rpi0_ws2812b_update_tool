@@ -1,0 +1,8 @@
+[Unit]
+Description=ws2812b_bootscript
+[Service]
+Type=oneshot
+ExecStart=/home/pi/ws2812b.sh
+[Install]
+WantedBy=multi-user.target
+
