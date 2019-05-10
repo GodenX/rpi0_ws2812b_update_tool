@@ -1,7 +1,8 @@
 [Unit]
-Description=ws2812b_bootscript
+Description=ws2812b.service
+After=dnsmasq.service
 [Service]
-Type=oneshot
+Type=forking
 ExecStart=/home/pi/ws2812b.sh
 [Install]
 WantedBy=multi-user.target
