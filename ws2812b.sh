@@ -1,5 +1,7 @@
 #!/bin/sh
 
+sleep 30s
+
 if [  ! -d "/home/pi/ws2812b_auto_update/" ]; then
  mkdir /home/pi/ws2812b_auto_update/
  echo "mkdir ws2812b_auto_update/"
@@ -11,7 +13,6 @@ if [ -d "/home/pi/ws2812b_auto_update/rpi0_ws2812b/" ]; then
  echo "rm -rf ws2812b_auto_update/rpi0_ws2812b/"
 fi
 
-sleep 10s
 timeout 60 git clone https://github.com/GodenX/rpi0_ws2812b.git
 
 if [ -d "/home/pi/rpi0_ws2812b/" ]; then
@@ -21,7 +22,7 @@ if [ -d "/home/pi/rpi0_ws2812b/" ]; then
   rm -f update
   rm -rf /home/pi/rpi0_ws2812b/
   cd ..
-  mv /home/pi/rpi0_ws2812b /home/pi/
+  mv /home/pi/ws2812b_auto_update/rpi0_ws2812b /home/pi/
  else
   echo "git pull"
   cd /home/pi/rpi0_ws2812b/
@@ -41,7 +42,7 @@ else
  fi
 fi
 
-nohup python3 /home/pi/rpi0_ws2812b/app.py >> /home/pi/ws2812b.out 2>&1 &
+nohup python3 /home/pi/rpi0_ws2812b/app.py > /home/pi/ws2812b.out 2>&1 &
 echo "OK!"
 
 exit 0
